@@ -1,5 +1,8 @@
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Scanner;
+
 public class dfsAlgorithm {
+    
     LinkedList<Integer> a[];
     boolean visited[];
 
@@ -15,28 +18,27 @@ public class dfsAlgorithm {
         a[v].add(w);
     }
 
-    void DFS(int vertex){
-        visited[vertex] = true;
-        System.out.print(vertex+"\t");
-
-        Iterator<Integer> it = a[vertex].listIterator();
-        while(it.hasNext()){
-            int w = it.next();
-            if(!visited[w]){
-                DFS(w);
+    public void dfs(int v) {
+        visited[v] = true;
+        System.out.print(v + " ");
+        for (int i = 0; i < a[v].size(); i++) {
+            int w = a[v].get(i);
+            if (!visited[w]) {
+                dfs(w);
             }
         }
     }
+
     public static void main(String[] args) {
-        dfsAlgorithm d = new dfsAlgorithm(4);
-
-        d.addEdge(0, 1);
-        d.addEdge(0, 2);
-        d.addEdge(1, 2);
-        d.addEdge(2, 0);
-        d.addEdge(2, 3);
-        d.addEdge(3, 3);
-
-        d.DFS(0);
+        Scanner sc = new Scanner(System.in);
+        int v = sc.nextInt();
+        int e = sc.nextInt();
+        dfsAlgorithm obj = new dfsAlgorithm(v);
+        for (int i = 0; i < e; i++) {
+            int u = sc.nextInt();
+            int w = sc.nextInt();
+            obj.addEdge(u, w);
+        }
+        obj.dfs(0);
     }
 }
