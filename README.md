@@ -9,6 +9,7 @@
 * Find LCM and GCD
 * Check Armstrong number
 * Linked list
+* Neon number check
 
 
 ## Data structure and Algorithm
