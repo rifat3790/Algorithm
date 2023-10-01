@@ -10,6 +10,10 @@
 * Check Armstrong number
 * Linked list
 * Neon number check
+* Vowel consonant check
+* Factorial
+* Fibonacci series
+* Simple interest calculate
 
 
 ## Data structure and Algorithm
