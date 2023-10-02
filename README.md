@@ -3,7 +3,7 @@
 
 ## OOP concept link
 
-[Click here for the private repo]([https://classroom.github.com/a/ymFUnXH9](https://drive.google.com/drive/u/3/folders/1quIxIowfYQeHMTafIt7QXzOcPV-07lTj))
+[Click here to the link](https://drive.google.com/drive/folders/1quIxIowfYQeHMTafIt7QXzOcPV-07lTj?usp=sharing)
 
 
 ## Basic problem 
