@@ -20,6 +20,8 @@
 - Factorial
 - Fibonacci series
 - Simple interest calculate
+- Compound interest calculation
+- Perimeter rectangle
 
 ## Data Structures and Algorithms
 
