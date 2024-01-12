@@ -1,71 +1,54 @@
-import java.util.PriorityQueue;
-import java.util.Comparator;
-
-class HuffmanNode {
-    int item;
-    char c;
-    HuffmanNode left;
-    HuffmanNode right;
-
-}
-
-class ImplementComparator implements Comparator<HuffmanNode> {
-    public int compare(HuffmanNode x, HuffmanNode y) {
-        return x.item - y.item;
-    }
-
-}
+import java.util.HashSet;
 
 public class Main {
-    public static void printCode(HuffmanNode root, String s) {
-
-        if (root.left == null && root.right == null && Character.
-
-                isLetter(root.c)) {
-
-            System.out.println(root.c + " | " + s);
-
-            return;
-        }
-        printCode(root.left, s + "0");
-        printCode(root.right, s + "1");
-    }
 
     public static void main(String[] args) {
-        int n = 7;
-        char[] charArray = { 'A', 'B', 'C', 'D', 'E', 'F', 'G' };
-        int[] charFeq = { 2, 10, 3, 20, 7, 11, 4 };
-        PriorityQueue<HuffmanNode> q = new PriorityQueue<HuffmanNode>(n, new ImplementComparator());
-        for (int i = 0; i < n; i++) {
-            HuffmanNode hn = new HuffmanNode();
-            hn.c = charArray[i];
-            hn.item = charFeq[i];
-            hn.left = null;
-            hn.right = null;
-            q.add(hn);
-        }
+        String X = "ABCDEFGH";
+        String Y = "abcdefgh";
 
-        HuffmanNode root = null;
-        while (q.size() > 1) {
-            HuffmanNode x = q.peek();
-            q.poll();
+        int[][] L = lcs(X, Y);
+        System.out.println("The length of the Longest Common Subsequence is: " + L[X.length()][Y.length()]);
 
-            HuffmanNode y = q.peek();
-            q.poll();
-            HuffmanNode f = new HuffmanNode();
-            f.item = x.item + y.item;
-            f.c = '-';
-            f.left = x;
-            f.right = y;
+        HashSet<String> subsequences = new HashSet<>();
+        printSubsequences(X, Y, X.length(), Y.length(), L, "", subsequences);
 
-            root = f;
-            q.add(f);
-
-        }
-
-        System.out.println(" Char | Code ");
-        printCode(root, "");
-
+        System.out.println("\nAll common subsequences in descending order of length:");
+        subsequences.stream().sorted((s1, s2) -> s2.length() - s1.length()).forEach(System.out::println);
     }
 
+    static int[][] lcs(String X, String Y) {
+        int m = X.length();
+        int n = Y.length();
+        int[][] L = new int[m + 1][n + 1];
+
+        for (int i = 0; i <= m; i++) {
+            for (int j = 0; j <= n; j++) {
+                if (i == 0 || j == 0) {
+                    L[i][j] = 0;
+                } else if (X.charAt(i - 1) == Y.charAt(j - 1)) {
+                    L[i][j] = L[i - 1][j - 1] + 1;
+                } else {
+                    L[i][j] = Math.max(L[i - 1][j], L[i][j - 1]);
+                }
+            }
+        }
+        return L;
+    }
+
+    static void printSubsequences(String X, String Y, int i, int j, int[][] L, String subsequence, HashSet<String> subsequences) {
+        if (i == 0 || j == 0) {
+            subsequences.add(subsequence);
+            return;
+        }
+
+        if (X.charAt(i - 1) == Y.charAt(j - 1)) {
+            printSubsequences(X, Y, i - 1, j - 1, L, X.charAt(i - 1) + subsequence, subsequences);
+        } else {
+            if (L[i - 1][j] > L[i][j - 1]) {
+                printSubsequences(X, Y, i - 1, j, L, subsequence, subsequences);
+            } else {
+                printSubsequences(X, Y, i, j - 1, L, subsequence, subsequences);
+            }
+        }
+    }
 }
