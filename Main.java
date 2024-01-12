@@ -32,14 +32,14 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int n = 5;
-        char[] charArray = { 'A', 'B', 'C', 'D', 'R' };
-        int[] charfreq = { 5, 2, 1, 1, 2 };
+        int n = 7;
+        char[] charArray = { 'A', 'B', 'C', 'D', 'E', 'F', 'G' };
+        int[] charFeq = { 2, 10, 3, 20, 7, 11, 4 };
         PriorityQueue<HuffmanNode> q = new PriorityQueue<HuffmanNode>(n, new ImplementComparator());
         for (int i = 0; i < n; i++) {
             HuffmanNode hn = new HuffmanNode();
             hn.c = charArray[i];
-            hn.item = charfreq[i];
+            hn.item = charFeq[i];
             hn.left = null;
             hn.right = null;
             q.add(hn);
@@ -64,7 +64,6 @@ public class Main {
         }
 
         System.out.println(" Char | Code ");
-        System.out.println("−−−−−−−−−−−−−");
         printCode(root, "");
 
     }
